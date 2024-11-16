@@ -1,5 +1,7 @@
 package Date;
 
+import java.time.*;
+
 public class Date {
     // Attributes
     private int day;
@@ -44,17 +46,17 @@ public class Date {
     }
 
     // toString method to represent the date as a string
-    @Override
     public String toString() {
         return String.format("%02d/%02d/%04d", day, month, year);
     }
 
     // autoSetDate method to set a default date (e.g., current date or any predefined date)
     public void autoSetDate() {
-        // Example: setting a default date (1st January 2000)
-        this.day = 1;
-        this.month = 1;
-        this.year = 2000;
+        LocalDate currentDate = LocalDate.now();
+        this.day = currentDate.getDayOfMonth();
+        this.month = currentDate.getMonthValue();
+        this.year = currentDate.getYear();
+
     }
 
     // Main method (optional, for testing purposes)
@@ -63,7 +65,7 @@ public class Date {
         System.out.println("Default Date: " + date);
 
         // Setting a custom date
-        date.setDay(15);
+        date.setDay(12);
         date.setMonth(11);
         date.setYear(2024);
         System.out.println("Custom Date: " + date);
@@ -72,5 +74,8 @@ public class Date {
         System.out.println("Day: " + date.getDay());
         System.out.println("Month: " + date.getMonth());
         System.out.println("Year: " + date.getYear());
+
+        // Converting the date to a LocalDate object
+
     }
 }

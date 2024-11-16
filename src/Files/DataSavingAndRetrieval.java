@@ -22,9 +22,6 @@ public class DataSavingAndRetrieval {
         this.filePath = filePath;
     }
 
-    public String toString() {
-        return "DataSavingAndRetrieval [filePath=" + filePath + "]";
-    }
 
     /**
      * Saves the given object's string representation to the file specified by filePath.
