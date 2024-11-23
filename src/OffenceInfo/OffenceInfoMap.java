@@ -13,6 +13,7 @@ public class OffenceInfoMap<K,V> extends HashMap<String, OffenceInfo>{
 
     // primary constructor
     public OffenceInfoMap(String txtFile) {
+        super();
         genrateOffenceInfoMapFromTxtFile(txtFile);
     }
 
@@ -20,6 +21,7 @@ public class OffenceInfoMap<K,V> extends HashMap<String, OffenceInfo>{
     public OffenceInfoMap(OffenceInfoMap<String, OffenceInfo> map){
         super(map);
     }
+
 
     /**
      * This function reads a text file and generates a map of offence information.
@@ -34,7 +36,7 @@ public class OffenceInfoMap<K,V> extends HashMap<String, OffenceInfo>{
         try{
             File file = new File(txtFilePath);
             if(!file.exists()){
-                throw new FileNotFoundException("File not found: " + txtFilePath+ "Please create file with offence information");
+                throw new FileNotFoundException("File not found: " + txtFilePath+ "\nPlease create file with offence information");
             }
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
@@ -48,6 +50,10 @@ public class OffenceInfoMap<K,V> extends HashMap<String, OffenceInfo>{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        
     }
 }
 

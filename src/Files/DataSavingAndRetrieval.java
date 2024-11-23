@@ -98,7 +98,7 @@ public class DataSavingAndRetrieval {
      * @throws IOException If an error occurs while reading or writing to the file.
      * @author Jaheem Shaw
      */
-    public void removeData(int index) {
+    public void removeDataInIndex(int index) {
         try {
             int counter = 0, totalLines = 0;
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
