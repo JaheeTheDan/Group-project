@@ -70,10 +70,10 @@ public class JCFOfficers extends ParentOfficer
 	
 	
 	
-	public String ToString()
+	public String toString()
 	{
 		String output;
-		 super.ToString();
+		 super.toString();
 		 output = "Police Badge Number : " + badgeNumber;
 		 output = "Policce Station     : " + policeStation;
 		

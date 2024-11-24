@@ -2,9 +2,11 @@ package Files;
 
 import java.io.*;
 
+import Officer.ParentOfficer;
+
 public class DataSavingAndRetrieval {
 
-    private String filePath;
+    protected String filePath;
 
     public DataSavingAndRetrieval() {
         this.filePath = "data.txt";
@@ -24,18 +26,19 @@ public class DataSavingAndRetrieval {
 
 
     /**
-     * Saves the given object's string representation to the file specified by filePath.
-     * If the file does not exist, it will be created. If the file already exists, the new data will be appended.
+     * Saves the given text data in one line to the file specified by the filePath.
+     * If the file does not exist, it will be created.
+     * If the file already exists, the data will be appended to the end of the file.
      *
-     * @param obj The object to be saved. Its string representation will be written to the file.
-     * @throws IOException If an error occurs while writing to the file.
+     * @param txtData The string version data to be saved to the file.
+     * @throws Exception If an error occurs while writing to the file.
      * @author Jaheem Shaw
      */
-    public void saveData(Object obj) {
+    public void saveData(String txtData) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
 
-            writer.write(obj.toString());
+            writer.write(txtData);
             writer.newLine();
             writer.close();
 
@@ -44,6 +47,7 @@ public class DataSavingAndRetrieval {
             e.printStackTrace();
         }
     }
+
 
 
     /**
@@ -114,18 +118,19 @@ public class DataSavingAndRetrieval {
 
             reader = new BufferedReader(new FileReader(filePath));
 
-            try (BufferedWriter tempWriter = new BufferedWriter(new FileWriter("tempfile.txt", true))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (counter != index) {
-                        tempWriter.write(line);
-                    }
-                    tempWriter.newLine();
-                    counter++;
+            BufferedWriter tempWriter = new BufferedWriter(new FileWriter("tempfile.txt"));
+            
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (counter != index) {
+                    tempWriter.write(line);
                 }
-                reader.close();
-                tempWriter.close();
+                tempWriter.newLine();
+                counter++;
             }
+            reader.close();
+            tempWriter.close();
+            
 
             File originalFile = new File(filePath);
             File tempFile = new File("tempfile.txt");
@@ -141,18 +146,18 @@ public class DataSavingAndRetrieval {
 
 
     /**
-     * Updates the data stored at the specified index in the file with the given object's string representation.
+     * Updates the data stored at the specified index in the file.
+     *
+     * This method reads the file line by line, replacing the line at the specified index with the given text data.
      * If the specified index is out of bounds, an {@link IndexOutOfBoundsException} is thrown.
      *
-     * This method reads the file line by line, replacing the line at the specified index with the given object's string representation.
-     *
      * @param index The index of the data to update. The index starts from 0.
-     * @param obj The object whose string representation will replace the data at the specified index.
+     * @param txtData The new string version data to replace the existing data at the specified index.
      * @throws IndexOutOfBoundsException If the specified index is out of bounds.
      * @throws IOException If an error occurs while reading or writing to the file.
      * @author Jaheem Shaw
      */
-    public void updateDataInIndex(int index, Object obj) {
+    public void updateDataInIndex(int index, String txtData) {
         try {
             int counter = 0, totalLines = 0;
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -168,20 +173,21 @@ public class DataSavingAndRetrieval {
 
             reader = new BufferedReader(new FileReader(filePath));
 
-            try (BufferedWriter tempWriter = new BufferedWriter(new FileWriter("tempfile.txt", true))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (counter == index) {
-                        tempWriter.write(obj.toString());
-                    } else {
-                        tempWriter.write(line);
-                    }
-                    tempWriter.newLine();
-                    counter++;
+            BufferedWriter tempWriter = new BufferedWriter(new FileWriter("tempfile.txt"));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (counter == index) {
+                    tempWriter.write(txtData);
+                } else {
+                    tempWriter.write(line);
                 }
-                reader.close();
-                tempWriter.close();
+                tempWriter.newLine();
+                counter++;
             }
+            reader.close();
+            tempWriter.close();
+
 
             File originalFile = new File(filePath);
             File tempFile = new File("tempfile.txt");
@@ -196,6 +202,7 @@ public class DataSavingAndRetrieval {
     }
 
 
+
     public static void main(String[] args) {
 
         try {
@@ -206,6 +213,8 @@ public class DataSavingAndRetrieval {
 
         DataSavingAndRetrieval data = new DataSavingAndRetrieval();
 
+        data.updateDataInIndex(1,  "data");
+        System.out.println("updateDataInIndex".toString());
 
     }
 }

@@ -58,13 +58,11 @@ public class ParentOfficer
 	//Display
 
 	
-	public String ToString()
+	public String toString()
 	{
 		String output;
 		
-		output = "Public Officers First: " + fname;
-		output += "Public Officers last: " + lname;
-		
+		output = "Public Officers Name: " + fname + " "+lname;		
 		return output;
 		
 		
