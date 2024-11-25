@@ -5,8 +5,6 @@ public class ParentOfficer
 	protected String fname;
 	protected String lname;
 	
-	
-	
 	//Default Constructor
 	public ParentOfficer()
 	{
@@ -34,21 +32,17 @@ public class ParentOfficer
 	}
 
 	// Getters & Setters
-	
 	public String getFname() {
 		return fname;
 	}
-
 
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
 
-
 	public String getLname() {
 		return lname;
 	}
-
 
 	public void setLname(String lname) {
 		this.lname = lname;
@@ -56,15 +50,11 @@ public class ParentOfficer
 	
 	
 	//Display
-
-	
 	public String toString()
 	{
 		String output;
-		
-		output = "Public Officers Name: " + fname + " "+lname;		
+		output = "Officers Name: " + fname + " "+lname;		
 		return output;
-		
 		
 	}
 	

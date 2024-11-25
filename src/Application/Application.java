@@ -2,14 +2,16 @@ package Application;
 
 import Date.Date;
 
+// TODO: Remembered to uncomment the Driver class
+// TODO: And change applicant attributes to the class
 public class Application 
 {
 	private String applicantFName;
 	private String applicantLName;
 	private int applicantTRN;
-	private Driver driver;
+	// private Driver driver;
 	private Date date;
-	private String isApproved;
+	private boolean isApproved;
 	private String reasonForDenial;
 	
 	//Default Constructor
@@ -18,19 +20,21 @@ public class Application
 		applicantFName = "";
 		applicantLName = "";
 		applicantTRN = 0;
-		driver = new Driver();
+		// driver = new Driver();
 		date = new Date();
-		isApproved = "";
+		isApproved = false;
 		reasonForDenial = "";
 	}
 	
 	//Primary Constructor
-	public Application(String applicantFName, String applicantLName, int applicantTRN, Driver driver, Date date, String isApproved, String reasonForDenial)
+	public Application(String applicantFName, String applicantLName, int applicantTRN, 
+	// Driver driver, 
+	Date date, boolean isApproved, String reasonForDenial)
 	{
 		this.applicantFName = applicantFName;
 		this.applicantLName = applicantLName;
 		this.applicantTRN = applicantTRN;
-		this.driver = driver;
+		// this.driver = driver;
 		this.date = date;
 		this.isApproved = isApproved;
 		this.reasonForDenial = reasonForDenial;
@@ -69,15 +73,15 @@ public class Application
 		this.applicantTRN = applicantTRN;
 	}
 
-	public Driver getDriver() 
-	{
-		return driver;
-	}
+	// public Driver getDriver() 
+	// {
+	// 	return driver;
+	// }
 
-	public void setDriver(Driver driver) 
-	{
-		this.driver = driver;
-	}
+	// public void setDriver(Driver driver) 
+	// {
+	// 	this.driver = driver;
+	// }
 
 	public Date getDate() 
 	{
@@ -89,12 +93,12 @@ public class Application
 		this.date = date;
 	}
 
-	public String isApproved() 
+	public boolean getIsApproved() 
 	{
 		return isApproved;
 	}
 
-	public void setApproved(String isApproved) 
+	public void setIsApproved(boolean isApproved) 
 	{
 		this.isApproved = isApproved;
 	}
@@ -111,19 +115,17 @@ public class Application
 	
 	
 	//ToString Display Method
-	public String ToString()
+	public String toString()
 	{
 		String output;
 		
 		output = "Applicant first name: " + applicantFName;
 		output += "\nApplicant last name: " + applicantLName;
 		output += "\nApplicant TRN: " + applicantTRN;
-		output += "\nDriver: " + driver.getTicketArray() + driver.getParishIssuedIn();
-		output += "\n Date: " + date.getDay() + "/" + date.getMonth() + "/" + date.getYear();
-		output += "\n Applicant is approved?: " + isApproved;
-		output += "\n Reason for denial: " + reasonForDenial;
-		
-		System.out.println(output);
+		// output += "\nDriver: " + driver.getTicketArray() + driver.getParishIssuedIn();
+		output += "\nDate: " + date.getDay() + "/" + date.getMonth() + "/" + date.getYear();
+		output += "\nApplicant is approved?: " + isApproved;
+		output += "\nReason for denial: " + reasonForDenial;
 		
 		return output;
 	}
