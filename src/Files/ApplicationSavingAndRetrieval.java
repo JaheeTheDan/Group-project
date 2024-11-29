@@ -20,17 +20,6 @@ public class ApplicationSavingAndRetrieval extends DataSavingAndRetrieval {
         super(obj);
     }
 
-    @Override
-    protected String objectStringify(Object obj) {
-        String line = "";
-        line += ((Application) obj).getApplicantFName();
-        line += "," + ((Application) obj).getApplicantLName();
-        line += "," + ((Application) obj).getApplicantTRN();
-        line += "," + ((Application) obj).getDate().toString();
-        line += "," + ((Application) obj).getIsApproved();
-        line += "," + ((Application) obj).getReasonForDenial();
-        return line;
-    }
 
     @Override
     protected Object parseObject(String objectString) {
@@ -64,6 +53,25 @@ public class ApplicationSavingAndRetrieval extends DataSavingAndRetrieval {
         return application;
     }
 
+    @Override
+    protected String stringifyObject(Object obj) {
+        String line = "";
+        if (obj instanceof String) {
+            line += obj.toString();
+            return line;
+        }
+        
+        Application application = (Application) obj;
+        line += application.getApplicantFName() + ",";
+        line += application.getApplicantLName() + ",";
+        line += application.getApplicantTRN() + ",";
+        line += application.getDate().toString() + ",";
+        line += application.getIsApproved() + ",";
+        line += application.getReasonForDenial()+",";
+        
+        return line;
+    }
+    
     /**
      * Saves the given application data to the file.
      *
@@ -73,7 +81,7 @@ public class ApplicationSavingAndRetrieval extends DataSavingAndRetrieval {
      *                    file.
      *                    The application data will be written in the format defined
      *                    by the
-     *                    {@link #objectStringify(Object)} method.
+     *                    {@link #stringifyObject(Object)} method.
      *
      * @throws IOException If an I/O error occurs while writing to the file.
      * @author Jaheem Shaw
@@ -99,6 +107,8 @@ public class ApplicationSavingAndRetrieval extends DataSavingAndRetrieval {
      * @return The data at the specified index, or null if the index is out of
      *         range.
      *         In this case, the data is casted to an {@link Application} object.
+     * 
+     * @throws IndexOutOfBoundsException If the specified index is out of bounds.
      * @throws IOException If an I/O error occurs while reading the file.
      * @author Jaheem Shaw
      */
@@ -171,14 +181,14 @@ public class ApplicationSavingAndRetrieval extends DataSavingAndRetrieval {
         System.out.println(retrievedApplication+ "\n----------");
 
         // Updating the application
-        retrievedApplication.setIsApproved(false);
-        retrievedApplication.setReasonForDenial("Changed reason");
-        file.updateDataInIndex(0, retrievedApplication);
+        // retrievedApplication.setIsApproved(false);
+        // retrievedApplication.setReasonForDenial("Changed reason");
+        // file.updateDataInIndex(0, retrievedApplication);
 
-        Application apps[] = file.getAllData();
-        for (Application app : apps) {
-            System.out.println(app + "\n");
-        }
+        // Application apps[] = file.getAllData();
+        // for (Application app : apps) {
+        //     System.out.println(app + "\n");
+        // }
 
     }
 

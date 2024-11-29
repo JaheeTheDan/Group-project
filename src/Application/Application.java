@@ -4,6 +4,7 @@ import Date.Date;
 
 // TODO: Remembered to uncomment the Driver class
 // TODO: And change applicant attributes to the class
+// TODO: Add the applicate class
 public class Application 
 {
 	private String applicantFName;

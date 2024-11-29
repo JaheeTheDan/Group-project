@@ -1,6 +1,12 @@
 package Files;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+
+import Date.Date;
 
 public class DataSavingAndRetrieval {
 
@@ -80,19 +86,20 @@ public class DataSavingAndRetrieval {
     /**
      * Converts the given object into a string format suitable for saving to a file.
      * This method currently simply converts the object's toString() representation.
-     * It also take a String representation of the object as a parameter
+     * It also take a String representation of the object as a parameter (which is
+     * already a string!) is itself returned.
      * It best recommends to have the String or object toString() method return a
      * one line string for best results.
      *
      * @param obj The object to be converted into a string.
      * @return A string representation of the given object.
+     * @exception IllegalArgumentException if the given object have
+     *                                     attributes(fields) that is not accessible
      *
      * @author Jaheem Shaw
      */
-    protected String objectStringify(Object obj) {
-        String line = "";
-        line += obj.toString();
-        return line;
+    protected String stringifyObject(Object obj) {
+        return obj.toString();
     }
 
     /**
@@ -107,11 +114,13 @@ public class DataSavingAndRetrieval {
      * @author Jaheem Shaw
      */
     protected Object parseObject(String objectString) {
+
         return objectString;
     }
 
     /**
-     * Take the object and save the string representation of the object in one to the file 
+     * Take the object and save the string representation of the object in one to
+     * the file
      * specified by the filePath. If the file does not exist, it will be created.
      * If the file already exists, the data will be appended to the end of the file.
      * It best recommends to have the String or object toString() method return a
@@ -125,7 +134,7 @@ public class DataSavingAndRetrieval {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
 
-            writer.write(objectStringify(obj));
+            writer.write(stringifyObject(obj));
             writer.newLine();
             writer.close();
             numberOfLines++;
@@ -137,23 +146,26 @@ public class DataSavingAndRetrieval {
         }
     }
 
-    
     /**
      * Retrieves the data stored at the specified index in the file.
      *
-     * This method reads the file line by line, stopping at the line at the specified
+     * This method reads the file line by line, stopping at the line at the
+     * specified
      * index.
-     * The method then parses the line into an object using the {@link #parseObject(String)} method.
+     * The method then parses the line into an object using the
+     * {@link #parseObject(String)} method.
      * If the specified index is out of bounds, an {@link IndexOutOfBoundsException}
      * is thrown.
      *
      * @param index The index of the data to retrieve. The index starts from 0.
      * @return The object stored at the specified index in the file.
      * @throws IndexOutOfBoundsException If the specified index is out of bounds.
-     * @throws Exception                If an error occurs while reading the file.
-     *                                  The error message and stack trace will be printed to the
-     *                                  console.
-     *                                  The program will then exit with a status code of 0.
+     * @throws Exception                 If an error occurs while reading the file.
+     *                                   The error message and stack trace will be
+     *                                   printed to the
+     *                                   console.
+     *                                   The program will then exit with a status
+     *                                   code of 0.
      */
     public Object retrieveDataInIndex(int index) {
         String line = "";
@@ -177,7 +189,6 @@ public class DataSavingAndRetrieval {
 
         return parseObject(line);
     }
-
 
     /**
      * Removes the data stored at the specified index in the file.
@@ -228,7 +239,6 @@ public class DataSavingAndRetrieval {
         }
     }
 
-    
     /**
      * Updates the data stored at the specified index in the file.
      *
@@ -268,7 +278,7 @@ public class DataSavingAndRetrieval {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (counter == index) {
-                    tempWriter.write(objectStringify(data));
+                    tempWriter.write(stringifyObject(data));
                 } else {
                     tempWriter.write(line);
                 }
@@ -289,7 +299,6 @@ public class DataSavingAndRetrieval {
             return;
         }
     }
-
 
     /**
      * Retrieves all the data stored in the file as an array of objects.
@@ -326,7 +335,6 @@ public class DataSavingAndRetrieval {
         return data;
     }
 
-
     public static void main(String[] args) {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -334,17 +342,14 @@ public class DataSavingAndRetrieval {
             e.printStackTrace();
         }
 
-        DataSavingAndRetrieval data = new DataSavingAndRetrieval();
-
-        System.out.println(data.getNumberOfLines());
+        DataSavingAndRetrieval data = new DataSavingAndRetrieval("yeana.txt");
+        Date date = new Date();
+        data.stringifyObject(date);
+        System.out.println(data.stringifyObject(date));
+        data.saveData(date.toString());
 
         // data.removeDataInIndex(0);
         // System.out.println(data.retrieveDataInIndex(2));
-
-        for (Object string : data.getAllData()) {
-            System.out.println(string);
-
-        }
 
     }
 }
