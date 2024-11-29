@@ -26,7 +26,7 @@ public class TicketSavingAndRetrieval extends DataSavingAndRetrieval{
 
     @Override
     protected Object parseObject(String objectString) {
-        OffenceInfoMap<String,OffenceInfo> infoMap = new OffenceInfoMap<String,OffenceInfo>("OffenceInfo.txt");
+        OffenceInfoMap<String,OffenceInfo> infoMap = new OffenceInfoMap<String,OffenceInfo>();
         String[] data = objectString.split(",");
         
         int ticketNumber = Integer.parseInt(data[0]);
@@ -90,7 +90,14 @@ public class TicketSavingAndRetrieval extends DataSavingAndRetrieval{
     }
 
 
-    
+    /**
+     * Saves a ticket object to the file.
+     *
+     * @param ticket The ticket object to be saved. It cannot be null.
+     * @throws IllegalArgumentException If the ticket object is null.
+     * @throws Exception If an error occurs while saving the ticket data.
+     * @author Jaheem Shaw
+     */
     public void saveData(Ticket ticket) {
         try {
             if (ticket == null) {
@@ -104,17 +111,43 @@ public class TicketSavingAndRetrieval extends DataSavingAndRetrieval{
         }
     }
 
+
     
+
+    /**
+     * Retrieves a ticket object from the file based on the given index.
+     *
+     * @param index The index of the ticket object to retrieve. The index is zero-based.
+     *              It must be a non-negative integer and less than the total number of ticket objects in the file.
+     * @return The ticket object at the specified index. If the index is out of range,
+     *         this method returns null.
+     * @throws Exception If an error occurs while reading the file or parsing the ticket data.
+     * @throws IndexOutOfBoundsException If the specified index is out of bounds.
+     *
+     * @author Jaheem Shaw
+     */
     public Ticket retrieveDataInIndex(int index) {
         return (Ticket) super.retrieveDataInIndex(index);
     }
 
     
+    /**
+     * Updates a ticket object in the file at the specified index.
+     *
+     * @param index The index of the ticket object to update. The index is zero-based.
+     *              It must be a non-negative integer and less than the total number of ticket objects in the file.
+     * @param ticket The updated ticket object. It cannot be null.
+     *
+     * @throws IllegalArgumentException If the ticket object is null.
+     * @throws Exception If an error occurs while updating the ticket data.
+     * @throws IndexOutOfBoundsException If the specified index is out of bounds.
+     *
+     * @author Jaheem Shaw
+     */
     public void updateDataInIndex(int index, Ticket ticket) {
         try {
             if (ticket == null) {
                 throw new IllegalArgumentException("Ticket data cannot be null.");
-                
             }
             super.updateDataInIndex(index, ticket);
         } catch (Exception e) {
@@ -122,13 +155,23 @@ public class TicketSavingAndRetrieval extends DataSavingAndRetrieval{
             e.printStackTrace();
             return;
         }
-        
     }
 
 
+    /**
+     * Retrieves all ticket data from the file and returns them as an array of Ticket objects.
+     *
+     * @return An array of Ticket objects containing all the ticket data from the file.
+     *         If there are no ticket data in the file, this method returns an empty array.
+     *
+     * @throws Exception If an error occurs while reading the file or parsing the ticket data.
+     *
+     * @author Jaheem Shaw
+     */
     public Ticket[] getAllData() {
         return Arrays.copyOf(super.getAllData(), numberOfLines, Ticket[].class);
     }
+
 
 
     public static void main(String[] args) {
@@ -140,7 +183,7 @@ public class TicketSavingAndRetrieval extends DataSavingAndRetrieval{
 
         TicketSavingAndRetrieval file = new TicketSavingAndRetrieval();
 
-        OffenceInfoMap<String, OffenceInfo> infoMap = new OffenceInfoMap<String, OffenceInfo>("OffenceInfo.txt");
+        OffenceInfoMap<String, OffenceInfo> infoMap = new OffenceInfoMap<String, OffenceInfo>();
 
 
         // Creating a ticket

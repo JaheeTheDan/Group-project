@@ -28,7 +28,7 @@ public class DriverSavingAndRetrieval extends DataSavingAndRetrieval {
 
     @Override
     protected Object parseObject(String objectString) {
-        OffenceInfoMap<String,OffenceInfo> infoMap = new OffenceInfoMap<String,OffenceInfo>("OffenceInfo.txt");
+        OffenceInfoMap<String,OffenceInfo> infoMap = new OffenceInfoMap<String,OffenceInfo>();
 
         String[] data = objectString.split(",");
 
