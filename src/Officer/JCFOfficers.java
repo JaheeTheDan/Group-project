@@ -3,6 +3,8 @@ package Officer;
 import java.sql.Driver;
 import java.util.Date;
 
+import Ticket.Ticket;
+
 public class JCFOfficers extends ParentOfficer {
 
 	private int badgeNumber;

@@ -1,7 +1,6 @@
 package Officer;
 
 import java.util.Scanner;
-import Files.*;
 
 public class ProcessingOfficer extends ParentOfficer {
 
